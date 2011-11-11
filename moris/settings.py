@@ -1,7 +1,9 @@
 # Django settings for moris project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
+
+PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -27,11 +29,17 @@ DATABASES = {
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Montreal'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
+
+#gettext = lambda s: s
+#LANGUAGES = (
+#    ('en', gettext(u'English')),
+#    ('fr', gettext(u'Français')),
+#)
 
 SITE_ID = 1
 
@@ -45,18 +53,18 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media/')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(PROJECT_PATH, '../static/')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -65,7 +73,7 @@ STATIC_URL = '/static/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = '/static/grappelli/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -92,12 +100,23 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+GRAPPELLI_ADMIN_TITLE = 'Django moris admin'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.request',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'moris.urls'
@@ -115,10 +134,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'grappelli',
+#   'grappelli.dashboard',
+    'django.contrib.admin',
+#   'guardian',
+    'moris.viewports',
+    'moris.workspaces',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -143,3 +164,11 @@ LOGGING = {
         },
     }
 }
+
+
+LOGIN_REDIRECT_URL = '/admin/'
+
+#DEFAULT_FILE_STORAGE = 'contrib.core.utils.ASCIISafeFileSystemStorage'
+
+#THUMBNAIL_MEDIA_ROOT = os.path.join(MEDIA_ROOT, 'cache/') 
+#THUMBNAIL_MEDIA_URL = '/media/cache/'

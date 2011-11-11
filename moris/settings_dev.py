@@ -1,7 +1,6 @@
 import os, sys
 from moris.settings import *
 
-# sys.path.append("../contrib/")
 sys.path.append("../")
 
 DEV = True
