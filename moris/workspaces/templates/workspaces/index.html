@@ -1,0 +1,49 @@
+<!DOCTYPE html> 
+<html>
+	<head> 
+        <meta charset="utf-8">
+        <title>Workspaces</title> 
+        <link type="text/css" href="{{ STATIC_URL }}workspaces/js/jqueryui/css/ui-darkness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />	
+        <script type="text/javascript" src="{{ STATIC_URL }}workspaces/js/jqueryui/js/jquery-1.6.2.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}workspaces/js/jqueryui/js/jquery-ui-1.8.16.custom.min.js"></script>
+        <script type="text/javascript">
+        $.moris = {};
+
+        $.moris.createViewport = function(title, src, w, h) {
+            var iframe = $('<iframe class="viewport" src="'+src+'"></iframe>').appendTo('#pane-workspace');
+            iframe.dialog({
+                width: w,
+                height: h,
+                resizable: false,
+                title: 'test'
+                //position: [],
+            }).width(w).height(h);
+
+        }
+
+        $(function(){
+            $.moris.createViewport('test viewport', 'http://jquerymobile.com/demos/1.0b1/', 240, 320);
+            $.moris.createViewport('test viewport', 'http://jquerymobile.com/demos/1.0b1/', 320, 240);
+            $.moris.createViewport('test viewport', 'http://jquerymobile.com/demos/1.0b1/', 320, 480);
+            $.moris.createViewport('test viewport', 'http://jquerymobile.com/demos/1.0b1/', 480, 320);
+        });
+        </script>
+        <style>    
+        html {
+            background: #111;
+        }
+        #pane-menu {}
+        #pane-workspace {}
+        .ui-dialog iframe.ui-dialog-content {
+            padding: 0;
+        }
+        </style>
+	</head> 
+	<body> 
+        <div id="pane-menu">
+        </div>
+        <div id="pane-workspace">  
+            
+        </div>
+	</body> 
+</html>

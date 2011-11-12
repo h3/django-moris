@@ -1,4 +1,5 @@
 # Django settings for moris project.
+import os
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -38,7 +39,7 @@ LANGUAGE_CODE = 'en-us'
 #gettext = lambda s: s
 #LANGUAGES = (
 #    ('en', gettext(u'English')),
-#    ('fr', gettext(u'Français')),
+#    ('fr', gettext(u'Francais')),
 #)
 
 SITE_ID = 1
