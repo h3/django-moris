@@ -1,0 +1,54 @@
+html {
+  background: #000; }
+
+body {
+  font-size: 62.5%; }
+
+#pane-menu {
+  position: absolute;
+  left: 10px;
+  width: 15%;
+  bottom: 10px;
+  top: 10px; }
+
+#pane-workspace {
+  position: absolute;
+  left: 270px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: #222;
+  height: 100%; }
+
+.ui-dialog iframe.ui-dialog-content {
+  padding: 0; }
+
+table {
+  font-size: 1em; }
+
+.ui-accordion .ui-accordion-content {
+  padding: 15px; }
+
+#toolbar {
+  padding: 10px 4px;
+  margin: 0px;
+  display: block; }
+
+#menu ul {
+  padding: 0;
+  margin: 0;
+  font-size: 1.4em; }
+  #menu ul ul {
+    margin: 5px 0 5px 7px;
+    padding: 0 0 0 7px;
+    border-left: 1px solid #222;
+    font-size: 0.9em; }
+  #menu ul li {
+    color: #ccc;
+    list-style: none; }
+    #menu ul li a {
+      display: block;
+      padding: 3px 0;
+      text-decoration: none; }
+      #menu ul li a:hover {
+        text-decoration: underline; }
