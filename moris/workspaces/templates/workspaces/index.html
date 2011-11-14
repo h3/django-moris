@@ -1,49 +1,136 @@
+{% load markup %}
 <!DOCTYPE html> 
 <html>
 	<head> 
         <meta charset="utf-8">
         <title>Workspaces</title> 
+        <link type="text/css" href="{{ STATIC_URL }}workspaces/css/workspace.css" rel="Stylesheet" />	
         <link type="text/css" href="{{ STATIC_URL }}workspaces/js/jqueryui/css/ui-darkness/jquery-ui-1.8.16.custom.css" rel="Stylesheet" />	
         <script type="text/javascript" src="{{ STATIC_URL }}workspaces/js/jqueryui/js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}workspaces/js/jqueryui/js/jquery-ui-1.8.16.custom.min.js"></script>
         <script type="text/javascript">
         $.moris = {};
 
+        $.moris.workspaces = {};
+
+        {% for workspace in workspace_list %}
+        $.moris.workspaces[{{ workspace.pk }}] = {
+            name: "{{ workspace.name }}",
+            viewports: []
+        }
+        {% endfor %}
+
         $.moris.createViewport = function(title, src, w, h) {
-            var iframe = $('<iframe class="viewport" src="'+src+'"></iframe>').appendTo('#pane-workspace');
+            var iframe = $('<iframe class="viewport" src="'+src+'"></iframe>')
+                            
+                            .appendTo('#pane-workspace');
             iframe.dialog({
                 width: w,
                 height: h,
                 resizable: false,
-                title: 'test'
+                title: title
                 //position: [],
-            }).width(w).height(h);
-
+            })
+            return iframe.width(w).height(h)
         }
 
         $(function(){
-            $.moris.createViewport('test viewport', 'http://jquerymobile.com/demos/1.0b1/', 240, 320);
-            $.moris.createViewport('test viewport', 'http://jquerymobile.com/demos/1.0b1/', 320, 240);
-            $.moris.createViewport('test viewport', 'http://jquerymobile.com/demos/1.0b1/', 320, 480);
-            $.moris.createViewport('test viewport', 'http://jquerymobile.com/demos/1.0b1/', 480, 320);
+            $( "#menu" ).accordion({fillSpace: true});
+            $.moris.createViewport('240x320 px', 'http://jquerymobile.com/demos/1.0b1/', 240, 320);
+            $.moris.createViewport('320x240 px', 'http://jquerymobile.com/demos/1.0b1/', 320, 240);
+            $.moris.createViewport('320x480 px', 'http://jquerymobile.com/demos/1.0b1/', 320, 480);
+            $.moris.createViewport('480x320 px', 'http://jquerymobile.com/demos/1.0b1/', 480, 320);
         });
+
         </script>
-        <style>    
-        html {
-            background: #111;
-        }
-        #pane-menu {}
-        #pane-workspace {}
-        .ui-dialog iframe.ui-dialog-content {
-            padding: 0;
-        }
-        </style>
+	<script>
+	$(function() {
+		$( "#play" ).button({
+			text: false,
+			icons: {
+				primary: "ui-icon-play"
+			}
+		})
+		.click(function() {
+			var options;
+			if ( $( this ).text() === "play" ) {
+				options = {
+					label: "pause",
+					icons: {
+						primary: "ui-icon-pause"
+					}
+				};
+			} else {
+				options = {
+					label: "play",
+					icons: {
+						primary: "ui-icon-play"
+					}
+				};
+			}
+			$( this ).button( "option", options );
+		});
+		$( "#stop" ).button({
+			text: false,
+			icons: {
+				primary: "ui-icon-stop"
+			}
+		})
+		.click(function() {
+			$( "#play" ).button( "option", {
+				label: "play",
+				icons: {
+					primary: "ui-icon-play"
+				}
+			});
+		});
+
+
+
+
+		$("#workspace-create").button({
+			icons: {
+				primary: "ui-icon-plus"
+			}
+		});
+
+		$("#viewport-create").button({
+			icons: {
+				primary: "ui-icon-plus"
+			}
+        });
+
+        {% comment %}
+		$( "#viewport-syncall" ).button({
+			icons: {
+				primary: "ui-icon-calculator"
+			}
+		});
+        {% endcomment %}
+	});
+	</script>
 	</head> 
 	<body> 
         <div id="pane-menu">
+            <div id="menu">
+                {% for workspace in workspace_list %}
+                <h3><a href="#">{{ workspace }}</a></h3>
+                <div class="nav" data-workspace="{{ workspace.pk }}">
+                    {{ workspace.menu|markdown }}
+                </div>
+                {% endfor %}
+            </div>
         </div>
-        <div id="pane-workspace">  
-            
+        <div id="pane-workspace">
+            <span id="toolbar" class="ui-widget-header">
+                <label>Window</label>
+                <select>
+                    <option>480x320 Blackberry</option>
+                </select>
+                <button id="workspace-create">New workspace</button>
+                <button id="viewport-create">New viewport</button>
+                {#<input type="checkbox" id="viewport-syncall" /><label for="viewport-syncall">Sync all</label>#}
+            </span>
         </div>
 	</body> 
 </html>

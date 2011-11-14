@@ -10,6 +10,10 @@ from moris.viewports.models import Viewport
 class Workspace(models.Model):
     owner = models.ForeignKey(User)
     name  = models.CharField(_('Name'), max_length=50)
+    menu  = models.TextField(_('Menu'), blank=True, null=True)
+
+    def __unicode__(self):
+        return self.name
 
 
 class WorkspaceAccess(models.Model):
@@ -26,7 +30,7 @@ class WorkspaceViewport(models.Model):
     pos_y = models.PositiveIntegerField(default=0)
 
 
-class WorkspaceMenuItem(models.Model):
-    workspace = models.ForeignKey(Workspace)
-    parent = models.ForeignKey('self', blank=True, null=True)
-    label = models.URLField(_('URL'), max_length=255)
+#class WorkspaceMenuItem(MP_Node):
+#    workspace = models.ForeignKey(Workspace)
+#    parent = models.ForeignKey('self', blank=True, null=True)
+#    label = models.URLField(_('URL'), max_length=255)

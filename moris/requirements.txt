@@ -2,7 +2,9 @@ django>=1.3.1
 simplejson
 django-grappelli
 svn+http://grappelli-fit.googlecode.com/svn/trunk#egg=grappelli-fit
-
+#django-treebeard
+#django-mptt
+#-e git+git://github.com/h3/django-treenav.git#egg=django-treenav
 # The "MySQL-python" requirement should theorically work..
 # But it practice the pip installation is broken :(
 # This is a temporary fix:

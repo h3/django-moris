@@ -4,5 +4,6 @@ from django.conf import settings
 from moris.workspaces.views import *
 
 urlpatterns=patterns('',
-    url(r'^$',     WorkspaceView.as_view(), name='moris-workspace'),
+    url(r'^workspace$', WorkspaceView.as_view(), name='moris-workspace'),
+    url(r'^tree$',      TreeTestView.as_view(), name='moris-treetest'),
 )

@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     (r'^i18n/',      include('django.conf.urls.i18n')),
     (r'^grappelli/', include('grappelli.urls')),
     (r'^admin/',     include(admin.site.urls)),
-    (r'^workspace$', include('moris.workspaces.urls')),
+    (r'^',           include('moris.workspaces.urls')),
 #   (r'^viewport$',  include('moris.viewport.urls')),
 )
 

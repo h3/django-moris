@@ -109,6 +109,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.core.context_processors.request',
+#   'treenav.context_processors.treenav_active',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -135,9 +136,12 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.markup',
     'grappelli',
 #   'grappelli.dashboard',
     'django.contrib.admin',
+#   'treenav',
+#   'treebeard',
 #   'guardian',
     'moris.viewports',
     'moris.workspaces',
